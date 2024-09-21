@@ -39,7 +39,7 @@ LocalParameters::LocalParameters() :
         PARAM_MULTIMER_TM_THRESHOLD(PARAM_MULTIMER_TM_THRESHOLD_ID,"--multimer-tm-threshold", "TMscore threshold for filtermultimer", "accept alignments with a tmsore > thr [0.0,1.0]",typeid(float), (void *) &filtMultimerTmThr, "^0(\\.[0-9]+)?|1(\\.0+)?$"),
         PARAM_CHAIN_TM_THRESHOLD(PARAM_CHAIN_TM_THRESHOLD_ID,"--chain-tm-threshold", "chain TMscore threshold for filtermultimer", "accept alignments with a tmsore > thr [0.0,1.0]",typeid(float), (void *) &filtChainTmThr, "^0(\\.[0-9]+)?|1(\\.0+)?$"),
         PARAM_INTERFACE_LDDT_THRESHOLD(PARAM_INTERFACE_LDDT_THRESHOLD_ID,"--interface-lddt-threshold", "Interface LDDT threshold", "accept alignments with a lddt > thr [0.0,1.0]",typeid(float), (void *) &filtInterfaceLddtThr, "^0(\\.[0-9]+)?|1(\\.0+)?$")
-    
+
        {
     PARAM_ALIGNMENT_MODE.description = "How to compute the alignment:\n0: automatic\n1: only score and end_pos\n2: also start_pos and cov\n3: also seq.id";
     PARAM_ALIGNMENT_MODE.regex = "^[0-3]{1}$";
@@ -231,7 +231,7 @@ LocalParameters::LocalParameters() :
     //easymultimerclusterworkflow
     easymultimerclusterworkflow = combineList(structurecreatedb, multimerclusterworkflow);
     easymultimerclusterworkflow = combineList(easymultimerclusterworkflow, result2repseq);
-    
+
     // expandmultimer
     expandmultimer.push_back(&PARAM_THREADS);
     expandmultimer.push_back(&PARAM_V);
@@ -278,7 +278,7 @@ LocalParameters::LocalParameters() :
     citations.emplace(CITATION_FOLDSEEK, "van Kempen, M., Kim, S.S., Tumescheit, C., Mirdita, M., Lee, J., Gilchrist, C.L.M., Söding, J., and Steinegger, M. Fast and accurate protein structure search with Foldseek. Nature Biotechnology, doi:10.1038/s41587-023-01773-0 (2023)");
     citations.emplace(CITATION_FOLDSEEK_MULTIMER, "Kim, W., Mirdita, M., Levy Karin, E., Gilchrist, C.L.M., Schweke, H., Söding, J., Levy, E., and Steinegger, M. Rapid and Sensitive Protein Complex Alignment with Foldseek-Multimer. bioRxiv, doi:10.1101/2024.04.14.589414 (2024)");
     citations.emplace(CITATION_PROSTT5, "Heinzinger, M., Weissenow, K., Gomez Sanchez, J., Henkel, A., Mirdita, M., Steinegger, M., Steinegger, M., and Burkhard, R. Bilingual Language Model for Protein Sequence and Structure. bioRxiv, doi:10.1101/2023.07.23.550085 (2024)");
-    
+
     //rewrite param vals.
     PARAM_FORMAT_OUTPUT.description = "Choose comma separated list of output columns from: query,target,evalue,gapopen,pident,fident,nident,qstart,qend,qlen\ntstart,tend,tlen,alnlen,raw,bits,cigar,qseq,tseq,qheader,theader,qaln,taln,mismatch,qcov,tcov\nqset,qsetid,tset,tsetid,taxid,taxname,taxlineage,\nlddt,lddtfull,qca,tca,t,u,qtmscore,ttmscore,alntmscore,rmsd,prob\ncomplexqtmscore,complexttmscore,complexu,complext,complexassignid\n";
 }

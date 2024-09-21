@@ -12,17 +12,17 @@ struct FoldSeekDbValidator : public DbValidator {
     static std::vector<int> cadb;
     static std::vector<int> flatfileStdinAndFolder;
     static std::vector<int> flatfileAndFolder;
-
 };
 
 class LocalParameters : public Parameters {
 public:
     LocalParameters();
-    static LocalParameters& getLocalInstance() {
+
+    static LocalParameters &getLocalInstance() {
         if (instance == NULL) {
             initParameterSingleton();
         }
-        return static_cast<LocalParameters&>(LocalParameters::getInstance());
+        return static_cast<LocalParameters &>(LocalParameters::getInstance());
     }
 
     static const int DBTYPE_CA_ALPHA;
@@ -71,8 +71,8 @@ public:
     static const int OUTFMT_COMPLEX_T = 57;
 
     static const int COORD_STORE_MODE_CA_FLOAT = 1;
-    static const int COORD_STORE_MODE_CA_DIFF  = 2;
-    static const int COORD_STORE_MODE_CA_PLAIN_TEXT  = 3;
+    static const int COORD_STORE_MODE_CA_DIFF = 2;
+    static const int COORD_STORE_MODE_CA_PLAIN_TEXT = 3;
 
     static const unsigned int INDEX_DB_CA_KEY_DB1 = 500;
     static const unsigned int INDEX_DB_CA_KEY_DB2 = 502;
@@ -177,13 +177,18 @@ public:
     std::string prostt5Model;
     int gpu;
 
-    static std::vector<int> getOutputFormat(int formatMode, const std::string &outformat, bool &needSequences, bool &needBacktrace, bool &needFullHeaders,
-                                            bool &needLookup, bool &needSource, bool &needTaxonomyMapping, bool &needTaxonomy, bool &needQCa, bool &needTCa, bool &needTMaligner,
-                                            bool &needLDDT);
+    static std::vector<int>
+    getOutputFormat(int formatMode, const std::string &outformat, bool &needSequences, bool &needBacktrace,
+                    bool &needFullHeaders,
+                    bool &needLookup, bool &needSource, bool &needTaxonomyMapping, bool &needTaxonomy, bool &needQCa,
+                    bool &needTCa, bool &needTMaligner,
+                    bool &needLDDT);
 
 
 private:
-    LocalParameters(LocalParameters const&);
-    void operator=(LocalParameters const&);
+    LocalParameters(LocalParameters const &);
+
+    void operator=(LocalParameters const &);
 };
+
 #endif
