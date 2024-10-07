@@ -62,13 +62,14 @@ public:
     static void mergeTargetSplits(const std::string &outDB, const std::string &outDBIndex,
                                   const std::vector<std::pair<std::string, std::string>> &fileNames, unsigned int threads);
 
-private:
+protected:
+    DBReader<unsigned int> *tdbr;
+    DBReader<unsigned int> *qdbr;
+
     const std::string queryDB;
     const std::string queryDBIndex;
     const std::string targetDB;
     const std::string targetDBIndex;
-    DBReader<unsigned int> *qdbr;
-    DBReader<unsigned int> *tdbr;
     DBReader<unsigned int> *tidxdbr;
     bool sameQTDB;
 
@@ -114,7 +115,7 @@ private:
     int compressed;
     QueryMatcherTaxonomyHook* taxonomyHook;
 
-    bool runSplit(const std::string &resultDB, const std::string &resultDBIndex, size_t split, bool merge);
+    virtual bool runSplit(const std::string &resultDB, const std::string &resultDBIndex, size_t split, bool merge);
 
     // compute kmer size and split size for index table
     static std::pair<int, int> optimizeSplit(size_t totalMemoryInByte, DBReader<unsigned int> *tdbr, int alphabetSize, int kmerSize,
