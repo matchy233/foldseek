@@ -435,16 +435,27 @@ std::vector<Command> foldseekCommands = {
                  {"prefilterDB", DbType::ACCESS_MODE_OUTPUT, DbType::NEED_DATA, &FoldSeekDbValidator::prefilterDb}
          }
         },
+        {"createfragbagdb", createfragbagdb, &localPar.createfragbagdb, COMMAND_PREFILTER, // NOT SURE
+         ("Create a fragbag database of a given sequence / structure database or pdb/mmCIF file"
+         "based on a fragment library or the database itself"),
+         NULL,
+         "Minghang Li <minghli@ethz.ch>",
+         "<i:queryDB> <i:fragmentFile> <o:fragbagDB>",
+         CITATION_END, {
+              {"queryDB", DbType::ACCESS_MODE_INPUT, DbType::NEED_DATA, &DbValidator::sequenceDb},
+              {"fragmentFile", DbType::ACCESS_MODE_INPUT, DbType::NEED_DATA, &DbValidator::flatfile},
+              {"fragbagDB", DbType::ACCESS_MODE_OUTPUT, DbType::NEED_DATA, &DbValidator::flatfile},
+         }
+        },
         {"expandcomplex", expandmultimer, &localPar.expandmultimer, COMMAND_PREFILTER,
          "", NULL, "", "", CITATION_FOLDSEEK_MULTIMER, {{"", DbType::ACCESS_MODE_INPUT, DbType::NEED_DATA, NULL}}
         },
-        {
-            "version", versionstring, &localPar.empty, COMMAND_HIDDEN,
-                    "",
-                    NULL,
-                    "",
-                    "",
-                    CITATION_FOLDSEEK_MULTIMER, {{"", DbType::ACCESS_MODE_INPUT, DbType::NEED_DATA, NULL}}
+        {"version", versionstring, &localPar.empty, COMMAND_HIDDEN,
+         "",
+         NULL,
+         "",
+         "",
+         CITATION_FOLDSEEK_MULTIMER, {{"", DbType::ACCESS_MODE_INPUT, DbType::NEED_DATA, NULL}}
         }
 };
 

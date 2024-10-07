@@ -18,13 +18,15 @@ set(strucclustutils_source_files
         strucclustutils/createmultimerreport.cpp
         strucclustutils/MultimerUtil.h
         strucclustutils/expandmultimer.cpp
+        strucclustutils/combiprefilter.cpp
+        strucclustutils/createfragbagdb.cpp
         PARENT_SCOPE
-        )
+)
 
 add_library(gemmiwrapper
-    GemmiWrapper.cpp
-    GemmiWrapper.h
-    )
+        GemmiWrapper.cpp
+        GemmiWrapper.h
+)
 
 get_target_property(COMPILE_TMP mmseqs-framework COMPILE_FLAGS)
 get_target_property(LINK_TMP mmseqs-framework LINK_FLAGS)

@@ -28,4 +28,8 @@ extern int easymultimersearch(int argc, const char **argv, const Command &comman
 extern int createmultimerreport(int argc, const char **argv, const Command &command);
 extern int expandmultimer(int argc, const char **argv, const Command &command);
 extern int multimersearch(int argc, const char **argv, const Command &command);
+
+// fragbag related new commands
+extern int createfragbagdb(int argc, const char **argv, const Command& command);
+extern int combiprefilter(int argc, const char **argv, const Command& command);
 #endif

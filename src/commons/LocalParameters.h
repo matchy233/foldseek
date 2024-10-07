@@ -40,6 +40,8 @@ public:
     static const int PREF_MODE_KMER = 0;
     static const int PREF_MODE_UNGAPPED = 1;
     static const int PREF_MODE_EXHAUSTIVE = 2;
+    // add new prefilter mode fragbag
+    static const int PREF_MODE_FRAGBAG = 3;
 
     static const int TMALIGN_HIT_ORDER_AVG = 0;
     static const int TMALIGN_HIT_ORDER_QUERY = 1;
@@ -114,6 +116,10 @@ public:
     std::vector<MMseqsParameter *> createmultimerreport;
     std::vector<MMseqsParameter *> expandmultimer;
     std::vector<MMseqsParameter *> convert2pdb;
+
+    // fragbag related commands
+    std::vector<MMseqsParameter *> createfragbagdb;
+    std::vector<MMseqsParameter *> fragbagprefilter;
 
     PARAMETER(PARAM_PREF_MODE)
     PARAMETER(PARAM_TMSCORE_THRESHOLD)
