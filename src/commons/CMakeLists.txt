@@ -9,4 +9,6 @@ set(commons_source_files
         commons/TMaligner.h
         commons/StructureSmithWaterman.cpp
         commons/StructureSmithWaterman.h
+        commons/CombinedPrefiltering.cpp
+        commons/CombinedPrefiltering.h
         PARENT_SCOPE)

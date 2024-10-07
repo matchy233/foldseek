@@ -435,13 +435,24 @@ std::vector<Command> foldseekCommands = {
                  {"prefilterDB", DbType::ACCESS_MODE_OUTPUT, DbType::NEED_DATA, &FoldSeekDbValidator::prefilterDb}
          }
         },
-        {"createfragbagdb", createfragbagdb, &localPar.createfragbagdb, COMMAND_PREFILTER, // NOT SURE
+        {"prefilter", combiprefilter, &localPar.prefilter, COMMAND_PREFILTER,
+         "",
+         NULL,
+         ""
+         "Minghang Li <minghli@ethz.ch>",
+         "<i:queryDB> <i:targetDB> <o:prefilterDB>",
+         CITATION_FOLDSEEK,
+         {{"queryDB", DbType::ACCESS_MODE_INPUT, DbType::NEED_DATA, &DbValidator::sequenceDb},
+          {"targetDB", DbType::ACCESS_MODE_INPUT, DbType::NEED_DATA, &DbValidator::sequenceDb},
+          {"prefilterDB", DbType::ACCESS_MODE_OUTPUT, DbType::NEED_DATA, &DbValidator::resultDb}},
+         },
+        {"createfragbagdb", createfragbagdb, &localPar.createfragbagdb, COMMAND_EXPERT, // NOT SURE
          ("Create a fragbag database of a given sequence / structure database or pdb/mmCIF file"
          "based on a fragment library or the database itself"),
          NULL,
          "Minghang Li <minghli@ethz.ch>",
          "<i:queryDB> <i:fragmentFile> <o:fragbagDB>",
-         CITATION_END, {
+         CITATION_FOLDSEEK, {
               {"queryDB", DbType::ACCESS_MODE_INPUT, DbType::NEED_DATA, &DbValidator::sequenceDb},
               {"fragmentFile", DbType::ACCESS_MODE_INPUT, DbType::NEED_DATA, &DbValidator::flatfile},
               {"fragbagDB", DbType::ACCESS_MODE_OUTPUT, DbType::NEED_DATA, &DbValidator::flatfile},
