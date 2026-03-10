@@ -935,46 +935,48 @@ public:
             dbTMscores[qidx] = dbTmScore;
             matchLen+=qmatchLen;
         }
-        // check chain-tm-threshold 
-        // if cov-mode 0, every chain should be aligned, every tm scores should be higher than the threshold
-        int chainpassNum = 0;
-        if (par_.covMode == Parameters::COV_MODE_BIDIRECTIONAL) {
-            if (dbChainNum != qChainKeys_.size() || dbChainNum != alnChainNum) {
-                return;
-            }
-            for (size_t qidx = 0; qidx < alnChainNum; qidx++) {
-                if(qTMscores[qidx] < par_.filtChainTmThr) {
+        if (par_.filtChainTmThr > 0) {
+            // check chain-tm-threshold 
+            // if cov-mode 0, every chain should be aligned, every tm scores should be higher than the threshold
+            int chainpassNum = 0;
+            if (par_.covMode == Parameters::COV_MODE_BIDIRECTIONAL) {
+                if (dbChainNum != qChainKeys_.size() || dbChainNum != alnChainNum) {
                     return;
                 }
-                if(dbTMscores[qidx] < par_.filtChainTmThr) {
+                for (size_t qidx = 0; qidx < alnChainNum; qidx++) {
+                    if(qTMscores[qidx] < par_.filtChainTmThr) {
+                        return;
+                    }
+                    if(dbTMscores[qidx] < par_.filtChainTmThr) {
+                        return;
+                    }
+                }
+            // if cov-mode 1 or 2, min-aligned-chains should have tm higher than the threshold.
+            } else if (par_.covMode == Parameters::COV_MODE_TARGET) {
+                for (size_t qidx = 0; qidx < alnChainNum; qidx++) {
+                    if (dbTMscores[qidx]>= par_.filtChainTmThr) {
+                    chainpassNum++; 
+                    }
+                }
+                if(chainpassNum < par_.minAlignedChains) {
                     return;
                 }
-            }
-        // if cov-mode 1 or 2, min-aligned-chains should have tm higher than the threshold.
-        } else if (par_.covMode == Parameters::COV_MODE_TARGET) {
-            for (size_t qidx = 0; qidx < alnChainNum; qidx++) {
-                if (dbTMscores[qidx]>= par_.filtChainTmThr) {
-                chainpassNum++; 
+            } else if (par_.covMode == Parameters::COV_MODE_QUERY) {
+                for (size_t qidx = 0; qidx < alnChainNum; qidx++) {
+                    if (qTMscores[qidx]>= par_.filtChainTmThr) {
+                    chainpassNum++; 
+                    }
                 }
-            }
-            if(chainpassNum < par_.minAlignedChains) {
-                return;
-            }
-        } else if (par_.covMode == Parameters::COV_MODE_QUERY) {
-            for (size_t qidx = 0; qidx < alnChainNum; qidx++) {
-                if (qTMscores[qidx]>= par_.filtChainTmThr) {
-                chainpassNum++; 
+                if(chainpassNum < par_.minAlignedChains) {
+                    return;
                 }
-            }
-            if(chainpassNum < par_.minAlignedChains) {
-                return;
             }
         }
         
         // interface-lddt, only check if aligned chains > 1
         // if the interface lddt parameter is set and aligned chain num ==1, then this assignment doesn't pass
         // if the interface lddt parameter isn't set, interfacelddt is printed out as 0 if aligned chain num ==1
-        // if aligned chain num > 1, always calculate
+        // if aligned chain num > 1, always calculate}
         float interfaceLddt = 0;
         if (alnChainNum == 1 && par_.filtInterfaceLddtThr > 0) {
             return;
